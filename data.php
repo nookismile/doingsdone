@@ -2,6 +2,7 @@
 $title = "";
 $content = "";
 $show_complete_tasks = rand(0, 1);
+$day = 24;
 
 $projects = ["Входящие", "Учеба", "Работа", "Домашние дела", "Авто"];
 

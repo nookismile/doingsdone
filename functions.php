@@ -8,3 +8,10 @@ function get_tasks_count_by_project(array $tasks, $project) {
     }
     return $sum;
 }
+
+function compare_dates($date) {
+    $current_date = time();
+    $deadline = strtotime($date);
+    $diff = $deadline - $current_date;
+    return $diff;
+}
