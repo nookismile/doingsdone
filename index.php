@@ -43,6 +43,15 @@ $tasks = [
     ]
 ];
 
+function show_count_tasks(array $tasks, $project) {
+    $sum = 0;
+    foreach ($tasks as $task) {
+        if ($task["category"] == $project){
+            $sum++;
+        }
+    }
+    return $sum;
+}
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -90,7 +99,7 @@ $tasks = [
                                     <a class="main-navigation__list-item-link" href="#">
                                       <?= $project ?>
                                     </a>
-                                    <span class="main-navigation__list-item-count">0</span>
+                                    <span class="main-navigation__list-item-count"><?= show_count_tasks($tasks, $project) ?></span>
                                 </li>
                             <?php endif; ?>
                         <?php endforeach; ?>
