@@ -6,6 +6,14 @@ CREATE DATABASE doingsdone
 
 USE doingsdone;
 
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(128) NOT NULL,
+    email VARCHAR(128) NOT NULL UNIQUE,
+    password VARCHAR(256) NOT NULL,
+    date_creation TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE TABLE projects (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(125) NOT NULL,
@@ -18,18 +26,10 @@ CREATE TABLE tasks (
     title VARCHAR(255) NOT NULL,
     status BOOLEAN DEFAULT FALSE,
     date_creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    deadline TIMESTAMP DEFAULT,
+    deadline DATE,
     file VARCHAR(125),
     author_id INT NOT NULL,
     project_id INT NOT NULL,
     FOREIGN KEY (author_id) REFERENCES users (id),
     FOREIGN KEY (project_id) REFERENCES projects (id)
-);
-
-CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(128) NOT NULL,
-    email VARCHAR(128) NOT NULL UNIQUE,
-    password VARCHAR(256) NOT NULL,
-    date_creation TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
