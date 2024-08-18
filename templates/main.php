@@ -7,7 +7,7 @@
                 <?php if (isset($project)): ?>
                     <li class="main-navigation__list-item">
                         <a class="main-navigation__list-item-link" href="#">
-                            <?= htmlspecialchars($project) ?>
+                            <?= htmlspecialchars($project["title"]) ?>
                         </a>
                         <span class="main-navigation__list-item-count"><?= get_tasks_count_by_project($tasks, $project) ?></span>
                     </li>
@@ -43,14 +43,14 @@
     <table class="tasks">
         <?php foreach ($tasks as $key => $task): ?>
             <?php if (isset($task)): ?>
-                <?php if (!($show_complete_tasks) && ($task["completed"])) { continue;} ?>
+                <?php if (!($show_complete_tasks) && ($task["status"])) { continue;} ?>
                 <tr class="tasks__item task
-                <?= ($task['completed']) ? 'task--completed' : ''; ?>
-                <?= (compare_dates($task["deadline"] <= $day)) ? 'task--cimportant' : ''; ?>
+                <?= ($task["status"]) ? 'task--completed' : ''; ?>
+                <?= (compare_dates($task["deadline"] <= 24)) ? 'task--cimportant' : ''; ?>
                 ">
                 <td class="task__select">
                         <label class="checkbox task__checkbox">
-                            <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1" <?php if ($task['completed']): ?>checked<?php endif; ?>>
+                            <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1" <?php if ($task["status"]): ?>checked<?php endif; ?>>
                             <span class="checkbox__text"><?= htmlspecialchars($task['title']); ?></span>
                         </label>
                     </td>

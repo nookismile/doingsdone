@@ -152,7 +152,7 @@ function include_template($name, array $data = []) {
 function get_tasks_count_by_project(array $tasks, $project) {
     $sum = 0;
     foreach ($tasks as $task) {
-        if ($task["project"] == $project){
+        if ($task["project_id"] == $project["id"]){
             $sum++;
         }
     }
