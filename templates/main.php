@@ -43,8 +43,7 @@
     <table class="tasks">
         <?php foreach ($tasks as $key => $task): ?>
             <?php if (isset($task)): ?>
-                <?php if ($show_complete_tasks == 0 && $task["completed"]): continue; ?>
-                <?php endif; ?>
+                <?php if (!($show_complete_tasks) && ($task["completed"])) { continue;} ?>
                 <tr class="tasks__item task
                 <?= ($task['completed']) ? 'task--completed' : ''; ?>
                 <?= (compare_dates($task["deadline"] <= $day)) ? 'task--cimportant' : ''; ?>
