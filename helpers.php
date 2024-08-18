@@ -143,4 +143,30 @@ function include_template($name, array $data = []) {
     return $result;
 }
 
+/**
+ * Подсчет количества задач в категориях проектов
+ * @param array $tasks массив задач
+ * @param string $project название проекта
+ * @return int Сумма задач в категорияз проектов
+ */
+function get_tasks_count_by_project(array $tasks, $project) {
+    $sum = 0;
+    foreach ($tasks as $task) {
+        if ($task["project"] == $project){
+            $sum++;
+        }
+    }
+    return $sum;
+}
 
+/**
+ * Подсчет времени, оставшегося до дедлайна задачи
+ * @param string $date дата дедлайна задачи
+ * @return int Число, показывающее сколько часов осталось до дедлайна
+ */
+function compare_dates($date) {
+    $current_date = time();
+    $deadline = strtotime($date);
+    $diff = $deadline - $current_date;
+    return $diff;
+}
