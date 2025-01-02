@@ -45,7 +45,7 @@
         </label>
     </div>
     <table class="tasks">
-        <?php foreach ($tasks as $key => $task): ?>
+        <?php foreach ($all_tasks as $key => $task): ?>
             <?php if (isset($task)): ?>
                 <?php if (!($show_complete_tasks) && ($task["status"])) { continue;} ?>
                 <tr class="tasks__item task

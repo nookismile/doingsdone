@@ -1,35 +1,34 @@
-DROP DATABASE IF EXISTS doingsdone;
+INSERT INTO users(name, email, password)
+VALUES
+    ('hero34@mail.ru', 'Ярослав', 'secretpassw1'),
+    ('asis174@mail.ru', 'Слава', 'secretpassw2');
 
-CREATE DATABASE doingsdone
-       DEFAULT CHARACTER SET utf8
-       DEFAULT COLLATE utf8_general_ci;
+INSERT INTO projects (title, author_id)
+VALUES
+    ('Входящие', 11),
+    ('Учеба', 12),
+    ('Работа', 11),
+    ('Домашние дела', 12),
+    ('Авто', 11);
 
-USE doingsdone;
+INSERT INTO tasks (title, deadline, status, author_id, project_id)
+VALUES
+    ('Собеседование в IT компании', '01.12.2024', false, 11, 18),
+    ('Выполнить тестовое задание', '25.12.2024', false, 11, 18),
+    ('Сделать задание первого раздела', '21.12.2024', true, 12, 17),
+    ('Встреча с другом', '22.12.2024', false, 11, 16),
+    ('Купить корм для кота', null, false, 12, 19),
+    ('Заказать пиццу', null, false, 12, 19);
 
-CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(128) NOT NULL,
-    email VARCHAR(128) NOT NULL UNIQUE,
-    password VARCHAR(256) NOT NULL,
-    date_creation TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
+SELECT title FROM projects WHERE author_id = 12;
 
-CREATE TABLE projects (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(125) NOT NULL,
-    author_id INT NOT NULL,
-    FOREIGN KEY (author_id) REFERENCES users (id)
-);
+SELECT title FROM tasks WHERE project_id = 18;
 
-CREATE TABLE tasks (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    status BOOLEAN DEFAULT FALSE,
-    date_creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    deadline DATE,
-    file VARCHAR(125),
-    author_id INT NOT NULL,
-    project_id INT NOT NULL,
-    FOREIGN KEY (author_id) REFERENCES users (id),
-    FOREIGN KEY (project_id) REFERENCES projects (id)
-);
+UPDATE tasks
+SET STATUS=1
+WHERE id=2;
+
+UPDATE tasks
+SET title='Сделать задание второго раздела'
+WHERE id=3;
+
