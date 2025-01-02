@@ -33,6 +33,16 @@ function get_tasks_by_project($con, int $project_id) {
     return $tasks;
 }
 
+function get_users($con) {
+    $sql = "SELECT * FROM users";
+    $stmt = mysqli_prepare($con, $sql);
+    mysqli_stmt_execute($stmt);
+    $res = mysqli_stmt_get_result($stmt);
+    $users = mysqli_fetch_all($res, MYSQLI_ASSOC);
+
+    return $users;
+}
+
 /**
  * Добавляет новую задачу в базу данных
  *
@@ -62,5 +72,27 @@ function add_task($con, string $title, string $filepath, string $deadline, int $
     if (!$result) {
         $error = mysqli_error($con);
         print ("Ошибка подключения к БД: " . $error);
+    }
+}
+
+/**
+ * Добавляет нового пользователя в базу данных
+ *
+ * @param bool $connect состояние подключения к БД
+ * @param sting $email - электронная почта пользователя
+ * @param sting $password - пароль пользователя
+ * @param sting $name - имя пользователя
+ *
+ */
+function add_user($con, string $email, string $password, string $name) {
+    $email = mysqli_real_escape_string($con, $email);
+    $password = password_hash($password, PASSWORD_DEFAULT);
+    $name = mysqli_real_escape_string($con, $name);
+    $sql = "INSERT INTO users SET email = '$email', password = '$password', name='$name';";
+    $result = mysqli_query($con, $sql);
+    if (!$result) {
+        $error = mysqli_error($con);
+        print ("Ошибка подключения к БД: " . $error);
+        exit();
     }
 }

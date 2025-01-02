@@ -217,7 +217,7 @@ function validate_date($date) {
  */
 function is_filled($input_name) {
     if (empty($_POST[$input_name])) {
-        return "Это поле не может быть пустым! ";
+        return "Это поле не может быть пустым!";
     }
 }
 
@@ -262,7 +262,6 @@ function is_correct_date($input_name) {
         }
     }
 }
-
 
 /**
  * Возвращает значение поля из отправленной формы
