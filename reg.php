@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         add_user($con, $_POST['email'], $hashPassword, $_POST['name']);
         header ('Location: index.php');
         exit;
-    };
+    }
 }
 
 $page_content = include_template(

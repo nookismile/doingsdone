@@ -4,9 +4,9 @@ require_once("init.php");
 require_once("queries.php");
 
 $author_id = 1;
-$projects = get_all_projects($con, $author_id);
+$projects = get_all_projects($con, $user_id);
 $projects_id = array_column($projects, "id");
-$all_tasks = get_all_tasks($con, $author_id);
+$all_tasks = get_all_tasks($con, $user_id);
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = array_filter($errors);
 
     if (empty($errors)) {
-        add_task($con, $_POST['name'], $file_link, $deadline, $_POST['project'], $author_id);
+        add_task($con, $_POST['name'], $file_link, $deadline, $_POST['project'], $user_id);
         header('Location: index.php');
         exit();
     }

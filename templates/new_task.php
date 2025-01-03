@@ -31,7 +31,7 @@
             <?php $classname = isset($errors['name']) ? "form__input--error" : ""; ?>
             <label class="form__label" for="name">Название <sup>*</sup></label>
 
-            <input class="form__input <?=$classname;?>" type="text" name="name" id="name" value="<?= get_post_value('name'); ?>" placeholder="Введите название">
+            <input class="form__input <?=$classname;?>" type="text" name="name" id="name" value="<?= htmlspecialchars(get_post_value('name')); ?>" placeholder="Введите название">
             <?php if(isset($errors['name'])): ?>
                 <p class="form__message"><?=$errors['name'] ?></p>
             <?php endif; ?>
@@ -53,7 +53,7 @@
         <div class="form__row">
             <label class="form__label" for="date">Дата выполнения</label>
 
-            <input class="form__input form__input--date" type="text" name="date" id="date" value="<?= get_post_value('date'); ?>" placeholder="Введите дату в формате ГГГГ-ММ-ДД">
+            <input class="form__input form__input--date" type="text" name="date" id="date" value="<?= htmlspecialchars(get_post_value('date')); ?>" placeholder="Введите дату в формате ГГГГ-ММ-ДД">
             <?php if(isset($errors['date'])): ?>
                 <p class="form__message"><?=$errors['date'] ?></p>
             <?php endif; ?>

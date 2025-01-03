@@ -1,9 +1,9 @@
 INSERT INTO users(name, email, password)
 VALUES
-    ('hero34@mail.ru', 'Ярослав', 'secretpassw1'),
-    ('asis174@mail.ru', 'Слава', 'secretpassw2');
+    ('Ярослав', 'hero34@mail.ru', 'secretpassw1'),
+    ('Слава', 'asis174@mail.ru', 'secretpassw2');
 
-INSERT INTO projects (title, author_id)
+INSERT INTO projects (title, user_id)
 VALUES
     ('Входящие', 11),
     ('Учеба', 12),
@@ -11,7 +11,7 @@ VALUES
     ('Домашние дела', 12),
     ('Авто', 11);
 
-INSERT INTO tasks (title, deadline, status, author_id, project_id)
+INSERT INTO tasks (title, deadline, status, user_id, project_id)
 VALUES
     ('Собеседование в IT компании', '01.12.2024', false, 11, 18),
     ('Выполнить тестовое задание', '25.12.2024', false, 11, 18),
@@ -20,7 +20,7 @@ VALUES
     ('Купить корм для кота', null, false, 12, 19),
     ('Заказать пиццу', null, false, 12, 19);
 
-SELECT title FROM projects WHERE author_id = 12;
+SELECT title FROM projects WHERE user_id = 12;
 
 SELECT title FROM tasks WHERE project_id = 18;
 

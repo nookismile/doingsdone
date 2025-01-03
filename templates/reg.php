@@ -5,7 +5,7 @@
         <?php $classname = isset($errors['name']) ? "form__input--error" : ""; ?>
         <label class="form__label" for="email">E-mail <sup>*</sup></label>
 
-        <input class="form__input <?=$classname;?>" type="text" name="email" id="email" value="<?= get_post_value('email'); ?>" placeholder="Введите e-mail">
+        <input class="form__input <?=$classname;?>" type="text" name="email" id="email" value="<?= htmlspecialchars(get_post_value('email')); ?>" placeholder="Введите e-mail">
 
         <?php if(isset($errors['email'])): ?>
             <p class="form__message"><?= $errors['email'] ;?></p>
@@ -16,7 +16,7 @@
         <?php $classname = isset($errors['name']) ? "form__input--error" : ""; ?>
         <label class="form__label" for="password">Пароль <sup>*</sup></label>
 
-        <input class="form__input <?=$classname;?>" type="password" name="password" id="password" value="<?= get_post_value('password'); ?>" placeholder="Введите пароль">
+        <input class="form__input <?=$classname;?>" type="password" name="password" id="password" value="<?= htmlspecialchars(get_post_value('password')); ?>" placeholder="Введите пароль">
 
         <?php if(isset($errors['password'])): ?>
             <p class="form__message"><?= $errors['password'] ;?></p>
@@ -27,7 +27,7 @@
         <?php $classname = isset($errors['name']) ? "form__input--error" : ""; ?>
         <label class="form__label" for="name">Имя <sup>*</sup></label>
 
-        <input class="form__input <?=$classname;?>" type="text" name="name" id="name" value="<?= get_post_value('name'); ?>" placeholder="Введите имя">
+        <input class="form__input <?=$classname;?>" type="text" name="name" id="name" value="<?= htmlspecialchars(get_post_value('name')); ?>" placeholder="Введите имя">
         <?php if(isset($errors['name'])): ?>
             <p class="form__message"><?= $errors['name'] ;?></p>
         <?php endif; ?>
