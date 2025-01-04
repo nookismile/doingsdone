@@ -10,34 +10,20 @@ $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors['name'] = is_filled('name');
-    //$errors['project'] = is_project_exist($projects, 'project');
-    $errors['date'] = is_correct_date('date');
 
-    $deadline = 'NULL';
-    if ($_POST['date']) {
-        $deadline = $_POST['date'];
-    }
 
-    $file_link = 'NULL';
-    if (is_uploaded_file($_FILES['file']['tmp_name'])) {
-        $file_name = 'file-' . uniqid() . '_' . $_FILES['file']['name'];
-        $file_path = __DIR__ . '/uploads/';
-        $file_url = '/uploads/' . $file_name;
-        move_uploaded_file($_FILES['file']['tmp_name'], $file_path . $file_name);
-        $file_link = '/uploads/' . $file_name;
-    }
 
     $errors = array_filter($errors);
 
     if (empty($errors)) {
-        add_task($con, $_POST['name'], $file_link, $deadline, $_POST['project'], $user_id);
+        add_project($con, $_POST['name'], $user_id);
         header('Location: index.php');
         exit();
     }
 }
 
 $page_content = include_template(
-    "new_task.php", [
+    "new_project.php", [
     "projects" => $projects,
     "all_tasks" => $all_tasks,
     "errors" => $errors

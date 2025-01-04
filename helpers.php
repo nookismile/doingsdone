@@ -271,3 +271,87 @@ function is_correct_date($input_name) {
 function get_post_value($input_name) {
     return $_POST[$input_name] ?? "";
 }
+
+/**
+ * функция, возвращающая значение массива по ключу при его наличии
+ * @param array $array массив
+ * @param string $key ключ
+ *
+ * @return string|integer $value значение массива по ключу
+ */
+function get_value($array, $key)
+{
+    if (isset($array[$key])) {
+        return $array[$key];
+    }
+    return "";
+}
+
+/**
+ * функция, возвращающая массив задач на сегодня
+ * @param array $tasks массив задач
+ *
+ * @return array массив задач на сегодня
+ */
+function get_tasks_today($tasks)
+{
+    $tasks_new = [];
+    $cur_date = time();
+    foreach ($tasks as $task) {
+        $task_date = strtotime(get_value($task, 'due_date'));
+
+        if ($task_date != 0) {
+            $diff = floor(($cur_date - $task_date) / 3600);
+            if ($diff < 24 && $diff > 0) {
+                $tasks_new[] = $task;
+            }
+        }
+    }
+    return $tasks_new;
+}
+
+/**
+ * функция, возвращающая массив задач на завтра
+ * @param array $tasks массив задач
+ *
+ * @return array массив задач на завтра
+ */
+function get_task_tomorrow($tasks)
+{
+    $tasks_new = [];
+    $cur_date = time();
+    foreach ($tasks as $task) {
+        $task_date = strtotime(get_value($task, 'due_date'));
+
+        if ($task_date != 0) {
+            $diff = floor(($task_date - $cur_date) / 3600);
+            if ($diff < 24 && $diff > 0) {
+                $tasks_new[] = $task;
+            }
+        }
+    }
+    return $tasks_new;
+}
+
+/**
+ * функция, возвращающая массив просроченных задач
+ * @param array $tasks массив задач
+ *
+ * @return array массив просроченных задач
+ */
+function get_task_overdue($tasks)
+{
+    $tasks_new = [];
+    $cur_date = time();
+    foreach ($tasks as $task) {
+        $task_date = strtotime(get_value($task, 'due_date'));
+        if ((int)$task_date !== 0 && get_value($task, 'status') !== 1) {
+            $diff = floor(($cur_date - $task_date) / 3600);
+            if ($diff >= 24) {
+                $tasks_new[] = $task;
+            }
+        }
+    }
+    return $tasks_new;
+}
+

@@ -28,3 +28,5 @@ CREATE TABLE users (
                        password VARCHAR(256) NOT NULL,
                        date_creation TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE FULLTEXT INDEX name_search ON tasks(name);
